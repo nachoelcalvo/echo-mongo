@@ -30,4 +30,13 @@ public class HotelService {
         BooleanExpression filterEq = qHotel.address.country.eq(country);
         return (List<Hotel>) hotelRepository.findAll(filterEq);
     }
+
+    public List<Hotel> getRecommended(){
+
+        QHotel qHotel = new QHotel("hotel");
+        BooleanExpression filterByPrice = qHotel.pricePerNight.lt(100);
+        BooleanExpression filterByRating = qHotel.reviews.any().rating.gt(6);
+
+        return (List<Hotel>) hotelRepository.findAll(filterByPrice.and(filterByRating));
+    }
 }

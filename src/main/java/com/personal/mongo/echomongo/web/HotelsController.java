@@ -27,14 +27,19 @@ public class HotelsController {
         return hotelService.getAllHotels();
     }
 
-    @GetMapping(path = "/address/{city}")
+    @GetMapping(path = "/addresses/{city}")
     public List<Hotel> getByHotelsByCity(@PathVariable String city){
         return hotelService.getByCity(city);
     }
 
-    @GetMapping(path = "/country/{country}")
+    @GetMapping(path = "/countries/{country}")
     public List<Hotel> getByHotelsByCountry(@PathVariable String country){
         return hotelService.getByCountry(country);
+    }
+
+    @GetMapping(path = "/recommandations")
+    public List<Hotel> getRecommandation(){
+        return hotelService.getRecommended();
     }
 
 }
