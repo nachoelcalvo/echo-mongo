@@ -27,9 +27,9 @@ public class DbSeeder implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         Policy marriot = new Policy(
-                "Auto",
+                "auto",
                 130,
-                new Address("madrid", "Spain"),
+                new Address("madrid", "spain"),
                 Arrays.asList(
                         new Review("John", 8, false),
                         new Review("Mary", 7, true)
@@ -37,18 +37,18 @@ public class DbSeeder implements ApplicationRunner {
         );
 
         Policy ibis = new Policy(
-                "Vida",
+                "vida",
                 90,
-                new Address("burgos", "Spain"),
+                new Address("burgos", "spain"),
                 Arrays.asList(
                         new Review("Teddy", 9, true)
                 )
         );
 
         Policy sofitel = new Policy(
-                "Hogar",
+                "hogar",
                 200,
-                new Address("valladolid", "Spain"),
+                new Address("valladolid", "spain"),
                 new ArrayList<>()
         );
 
