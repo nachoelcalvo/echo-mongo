@@ -1,9 +1,9 @@
 package com.personal.mongo.echomongo.runner;
 
 import com.personal.mongo.echomongo.domain.Address;
-import com.personal.mongo.echomongo.domain.Hotel;
+import com.personal.mongo.echomongo.domain.Policy;
 import com.personal.mongo.echomongo.domain.Review;
-import com.personal.mongo.echomongo.repository.HotelRepository;
+import com.personal.mongo.echomongo.repository.PolicyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -18,46 +18,46 @@ import java.util.List;
 public class DbSeeder implements ApplicationRunner {
 
 
-    private HotelRepository hotelRepository;
+    private PolicyRepository policyRepository;
 
-    public DbSeeder(HotelRepository hotelRepository) {
-        this.hotelRepository = hotelRepository;
+    public DbSeeder(PolicyRepository policyRepository) {
+        this.policyRepository = policyRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Hotel marriot = new Hotel(
-                "Marriot",
+        Policy marriot = new Policy(
+                "Auto",
                 130,
-                new Address("paris", "France"),
+                new Address("madrid", "Spain"),
                 Arrays.asList(
                         new Review("John", 8, false),
                         new Review("Mary", 7, true)
                 )
         );
 
-        Hotel ibis = new Hotel(
-                "Ibis",
+        Policy ibis = new Policy(
+                "Vida",
                 90,
-                new Address("Bucharest", "Romania"),
+                new Address("burgos", "Spain"),
                 Arrays.asList(
                         new Review("Teddy", 9, true)
                 )
         );
 
-        Hotel sofitel = new Hotel(
-                "Sofitel",
+        Policy sofitel = new Policy(
+                "Hogar",
                 200,
-                new Address("Rome", "Italy"),
+                new Address("valladolid", "Spain"),
                 new ArrayList<>()
         );
 
         seedData(Arrays.asList(marriot, ibis, sofitel));
     }
 
-    private void seedData(List<Hotel> hotels) {
+    private void seedData(List<Policy> policies) {
 
-        hotelRepository.deleteAll();
-        hotelRepository.saveAll(hotels);
+        policyRepository.deleteAll();
+        policyRepository.saveAll(policies);
     }
 }
