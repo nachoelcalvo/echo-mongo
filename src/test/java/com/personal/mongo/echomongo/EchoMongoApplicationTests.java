@@ -12,5 +12,4 @@ public class EchoMongoApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

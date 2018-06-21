@@ -5,7 +5,7 @@
 
 	<groupId>com.personal.mongo</groupId>
 	<artifactId>echo-mongo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>echo-mongo</name>
