@@ -1,4 +1,4 @@
-package com.personal.mongo.echomongo.domain;
+package com.personal.mongo.echomongo.domain.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

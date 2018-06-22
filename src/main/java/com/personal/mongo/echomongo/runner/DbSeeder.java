@@ -1,6 +1,6 @@
 package com.personal.mongo.echomongo.runner;
 
-import com.personal.mongo.echomongo.domain.Address;
+import com.personal.mongo.echomongo.domain.vo.Address;
 import com.personal.mongo.echomongo.domain.Policy;
 import com.personal.mongo.echomongo.domain.Review;
 import com.personal.mongo.echomongo.repository.PolicyRepository;

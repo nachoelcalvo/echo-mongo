@@ -1,6 +1,7 @@
 package com.personal.mongo.echomongo.domain;
 
 
+import com.personal.mongo.echomongo.domain.vo.Address;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,13 +27,19 @@ public class Policy implements Serializable {
     private Address address;
     private List<Review> reviews;
     @Indexed(direction = IndexDirection.ASCENDING)
-    private int pricePerNight;
+    private int price;
+
+    public Policy(String name, Address address, int price) {
+        this.name = name;
+        this.address = address;
+        this.price = price;
+    }
 
     public Policy(String name, int price, Address address, List<Review> reviews) {
         this.name = name;
         this.address = address;
         this.reviews = reviews;
-        this.pricePerNight = price;
+        this.price = price;
     }
 }
 

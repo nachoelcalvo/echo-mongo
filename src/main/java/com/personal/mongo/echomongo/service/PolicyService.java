@@ -1,6 +1,9 @@
 package com.personal.mongo.echomongo.service;
 
 import com.personal.mongo.echomongo.domain.Policy;
+import com.personal.mongo.echomongo.domain.vo.Address;
+import com.personal.mongo.echomongo.dto.AddressDTO;
+import com.personal.mongo.echomongo.dto.PolicyRequest;
 import com.personal.mongo.echomongo.repository.PolicyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
@@ -35,6 +38,21 @@ public class PolicyService {
     public Optional<Policy> getById(String id){
         log.info("Fetching policies with id: " + id + " from service");
         return policyRepository.findById(id);
+    }
+
+    public Policy createPolicy(PolicyRequest policyRequest){
+
+        Policy policy = obtainPolicy(policyRequest);
+
+        return policyRepository.save(policy);
+    }
+
+    private Policy obtainPolicy(PolicyRequest policyRequest) {
+
+        AddressDTO addressDTO = policyRequest.getAddress();
+        Address address = new Address(addressDTO.getCity(), addressDTO.getCountry());
+
+        return new Policy(policyRequest.getName(), address, policyRequest.getPrice());
     }
 }
 
