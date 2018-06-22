@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @CacheConfig(cacheNames = {"policies"})
@@ -25,10 +26,15 @@ public class PolicyService {
         return policyRepository.findAll();
     }
 
-    @Cacheable("policy")
     public List<Policy> getByCity(String city){
         log.info("Fetching policies with city: " + city + " from service");
         return policyRepository.findByCity(city);
+    }
+
+    @Cacheable(key="#id")
+    public Optional<Policy> getById(String id){
+        log.info("Fetching policies with id: " + id + " from service");
+        return policyRepository.findById(id);
     }
 }
 

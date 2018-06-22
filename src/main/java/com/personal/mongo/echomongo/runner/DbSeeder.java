@@ -9,9 +9,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -26,38 +28,35 @@ public class DbSeeder implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Policy marriot = new Policy(
-                "auto",
-                130,
-                new Address("madrid", "spain"),
-                Arrays.asList(
-                        new Review("John", 8, false),
-                        new Review("Mary", 7, true)
-                )
-        );
 
-        Policy ibis = new Policy(
-                "vida",
-                90,
-                new Address("burgos", "spain"),
-                Arrays.asList(
-                        new Review("Teddy", 9, true)
-                )
-        );
+        List<String> users = Arrays.asList("Juan", "Jose", "pedro");
+        List<String> types = Arrays.asList("hogar", "vida", "auto");
+        List<String> cities = Arrays.asList("madrid", "barcelona", "valencia");
+        List<Integer> prices = Arrays.asList(130, 200, 500, 800);
 
-        Policy sofitel = new Policy(
-                "hogar",
-                200,
-                new Address("valladolid", "spain"),
-                new ArrayList<>()
-        );
 
-        seedData(Arrays.asList(marriot, ibis, sofitel));
+        Runnable runnable = () -> {
+            Policy policy = createPolicy(users, types, cities, prices);
+            policyRepository.save(policy);
+        };
+
+        cleanDB();
+
+        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(runnable, 1,100, TimeUnit.MILLISECONDS);
     }
 
-    private void seedData(List<Policy> policies) {
-
+    private void cleanDB() {
         policyRepository.deleteAll();
-        policyRepository.saveAll(policies);
+    }
+
+    private Policy createPolicy(List<String> users, List<String> types, List<String> cities, List<Integer> prices) {
+        return new Policy(
+                        types.get(new Random().nextInt(types.size())),
+                        prices.get(new Random().nextInt(prices.size())),
+                        new Address(cities.get(new Random().nextInt(cities.size())), "Spain"),
+                        Arrays.asList(
+                                new Review(users.get(new Random().nextInt(users.size())), 8, false)
+                        )
+                );
     }
 }
