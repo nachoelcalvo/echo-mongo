@@ -4,12 +4,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.personal.mongo</groupId>
-	<artifactId>echo-mongo</artifactId>
+	<artifactId>spike-redis-mongo-caching</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>echo-mongo</name>
+	<name>spike-redis-mongo-caching</name>
 	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<junit-jupiter.version>5.1.1</junit-jupiter.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -44,7 +51,6 @@
 		</dependency>
 
 		<!--mongdo dsl -->
-
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-mongodb</artifactId>
@@ -56,6 +62,49 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!--embed mongo db for testing-->
+		<dependency>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+			<version>1.50.5</version>
+		</dependency>
+		<dependency>
+			<groupId>cz.jirutka.spring</groupId>
+			<artifactId>embedmongo-spring</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<!--testing frameworks-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.fakemongo</groupId>
+			<artifactId>fongo</artifactId>
+			<version>RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<parent>
@@ -64,12 +113,6 @@
 		<version>2.0.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
 
 	<build>
 		<plugins>
