@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
-class PolicyServiceImplTest {
+public class PolicyServiceImplTest {
 
     @Mock
     private PolicyRepository policyRepositoryMock;
@@ -37,8 +37,8 @@ class PolicyServiceImplTest {
         policyService = new PolicyServiceImpl(policyRepositoryMock);
     }
 
-    @DisplayName("Should get all policies")
     @Test
+    @DisplayName("Should get all policies")
     void shouldGetAllPolicies() {
         given(policyRepositoryMock.findAll()).willReturn(obtainListTestPolicies());
 
