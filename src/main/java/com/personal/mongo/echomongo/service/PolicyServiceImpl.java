@@ -5,6 +5,7 @@ import com.personal.mongo.echomongo.domain.vo.Address;
 import com.personal.mongo.echomongo.dto.AddressDTO;
 import com.personal.mongo.echomongo.dto.PolicyRequest;
 import com.personal.mongo.echomongo.repository.PolicyRepository;
+import com.personal.mongo.echomongo.service.impl.PolicyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,11 +17,11 @@ import java.util.Optional;
 @Slf4j
 @CacheConfig(cacheNames = {"policies"})
 @Service
-public class PolicyService {
+public class PolicyServiceImpl implements PolicyService{
 
     private PolicyRepository policyRepository;
 
-    public PolicyService(PolicyRepository policyRepository) {
+    public PolicyServiceImpl(PolicyRepository policyRepository) {
         this.policyRepository = policyRepository;
     }
 
@@ -41,9 +42,7 @@ public class PolicyService {
     }
 
     public Policy createPolicy(PolicyRequest policyRequest){
-
         Policy policy = obtainPolicy(policyRequest);
-
         return policyRepository.save(policy);
     }
 

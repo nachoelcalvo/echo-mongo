@@ -9,16 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
@@ -35,8 +32,7 @@ class PolicyRepositoryTest {
                         new Review("user", 8, false)
                 )
         );
-
-        Policy policySaved = policyRepository.save(policy);
+        policyRepository.save(policy);
     }
 
     @DisplayName("Should find a policy by city")
